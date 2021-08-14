@@ -1,0 +1,10 @@
+{# People person_detail.html #}
+{% extends 'base.html' %}
+
+{% block content %}
+{% if person.avatar %}
+    <img src="{{ person.avatar_thumbnail.url }}" />
+{% endif %}
+<h1>{{ person.last_name }}, {{ person.first_name }}{% if person.credentials %}, {{ person.credentials }}{% endif %}</h1>
+<p>{{ person.address.raw }} </p>
+{% endblock content %}

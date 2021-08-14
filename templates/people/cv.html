@@ -1,0 +1,108 @@
+{# People Detail #}
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'people/person_detail_cv.html' %}
+{% include 'people/education_detail_cv.html' %}
+
+
+<p>{% if license %} </p>
+<h2 class="western">Licenses & Certifications</h2>
+<ul>
+  <p style="margin-bottom: 0in;">{% for license_entry in license|dictsort:"license_abbreviation" %} </p>
+</ul>
+<table cellpadding="4" cellspacing="0" width="100%">
+</table>
+<table cellpadding="4" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td style="border: medium none ; padding: 0.05in;" width="200", align="right">
+      <!--<h4>{{license_entry.start_date|date:"Y"}} - {% if license_entry.end_date%}{{license_entry.end_date|date:"Y"}}{% else %}Present{% endif %}</h4>-->
+      {% ifchanged %}<h4>{% if license_entry.license_abbreviation %}{{ license_entry.license_abbreviation }}{% endif %}</h4>{% endifchanged %}
+      </td>
+      <td style="border: medium none ; padding: 0.05in;" width="85%">
+      <h4>{{license_entry.licensor.name}}{% if license_entry.department %}, {{license_entry.department.name}}{% endif %}</h4>
+      <h5>{{license_entry.license_name}}{% if license_entry.license_id %} ({{license_entry.license_id}}){% endif %}{% if license_entry.licensor.address.raw %}, {{ license_entry.licensor.address.raw }}{% endif %}</h5>
+	  {% if license_entry.description %}<p>{{license_entry.description}}</p>{% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <p>{% endfor %} </p>
+</ul>
+<p>{% else %} </p>
+<p>No license is available.</p>
+<p>{% endif %}</p>
+
+<p>{% if appointments %} </p>
+<h2 class="western">Appointments</h2>
+{% for type in appointments.0.APPOINTMENT_TYPE_CHOICES %}
+<!-- need to print type only if exists -->
+<ul>
+  <p style="margin-bottom: 0in;">{% for appointment in appointments|dictsortreversed:"start_date" %} </p>
+</ul>
+{% if appointment.appointment_type == type.0 %}
+{% ifchanged %}
+<h3>{{type.1}}</h3>
+{% endifchanged %}
+<table cellpadding="4" cellspacing="0" width="100%">
+</table>
+<table cellpadding="4" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td style="border: medium none ; padding: 0.05in;" width="200", align="right">
+      <h4>{{appointment.start_date|date:"Y"}}-{% if appointment.end_date%}{{appointment.end_date|date:"Y"}}{% else %}Present{% endif %}</h4>
+      </td>
+      <td style="border: medium none ; padding: 0.05in;" width="85%">
+      <h4>{% if appointment.rank %}{{appointment.rank}}, {% endif %}{% if appointment.position %}{{appointment.position}}, {% endif %}{{appointment.department.name}}</h4>
+      <h5>{{appointment.organization.name}}{% if appointment.organization.address.raw %}, {{ appointment.organization.address.raw }}{% endif %}</h5>
+	  {% if appointment.description %}<p>{{appointment.description|linebreaks}}</p>{% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+<ul>
+  <p>{% endfor %} </p>
+</ul>
+{% endfor%}
+<p>{% else %} </p>
+<p>No appointments are available.</p>
+<p>{% endif %}</p>
+
+<p>{% if honor %} </p>
+<h2 class="western">Licenses & Certifications</h2>
+<ul>
+  <p style="margin-bottom: 0in;">{% for honor_entry in honor|dictsort:"honor_abbreviation" %} </p>
+</ul>
+<table cellpadding="4" cellspacing="0" width="100%">
+</table>
+<table cellpadding="4" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td style="border: medium none ; padding: 0.05in;" width="200", align="right">
+      <!--<h4>{{honor_entry.start_date|date:"Y"}} - {% if honor_entry.end_date%}{{honor_entry.end_date|date:"Y"}}{% else %}Present{% endif %}</h4>-->
+      {% ifchanged %}<h4>{% if honor_entry.honor_abbreviation %}{{ honor_entry.honor_abbreviation }}{% endif %}</h4>{% endifchanged %}
+      </td>
+      <td style="border: medium none ; padding: 0.05in;" width="85%">
+      <h4>{{honor_entry.honoror.name}}{% if honor_entry.department %}, {{honor_entry.department.name}}{% endif %}</h4>
+      <h5>{{honor_entry.honor_name}}{% if honor_entry.honor_id %} ({{honor_entry.honor_id}}){% endif %}{% if honor_entry.honoror.address.raw %}, {{ honor_entry.honoror.address.raw }}{% endif %}</h5>
+	  {% if honor_entry.description %}<p>{{honor_entry.description}}</p>{% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <p>{% endfor %} </p>
+</ul>
+<p>{% else %} </p>
+<p>No honor is available.</p>
+<p>{% endif %}</p>
+{% endblock content %}
+top">
+      <td style="border: medium none ; padding: 0.05in;" width="200", align="right">
+      <!--<h4>{{honor_entry.start_date|date:"Y"}} - {% if honor_entry.end_date%}{{honor_entry.end_date|date:"Y"}}{% else %}Present{% endif %}</h4>-->
+      {% ifchanged %}<h4>{% if honor_entry.honor_abbreviation %}{{ honor_entry.honor_abbreviation }}{% endif %}</h4>{% endifchanged %}
+      </td>
+      <td style="bor

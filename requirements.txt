@@ -1,0 +1,3 @@
+django-imagekit
+django-address
+social-auth-app-django

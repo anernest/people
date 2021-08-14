@@ -1,0 +1,13 @@
+{# People education_list.html #}
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Education<a href="{% url 'people:create_education' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></h1>
+<ul>
+{% for item in object_list %}
+    <li>{{ item }}</li>
+{% empty %}
+    <li>No entries yet.</li>
+{% endfor %}
+</ul>
+{% endblock content %}

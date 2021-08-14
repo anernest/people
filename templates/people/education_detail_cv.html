@@ -1,0 +1,31 @@
+{# People education_detail_cv #}
+<p>{% if education %} </p>
+<h2 class="western">Education</h2>
+<ul>
+  <p style="margin-bottom: 0in;">{% for education_entry in education|dictsortreversed:"start_date" %} </p>
+</ul>
+<table cellpadding="4" cellspacing="0" width="100%">
+</table>
+<table cellpadding="4" cellspacing="0" width="100%">
+  <tbody>
+    <tr valign="top">
+      <td style="border: medium none ; padding: 0.05in;" width="200", align="right">
+      <h4>{{education_entry.start_date|date:"Y"}} - {% if education_entry.end_date%}{{education_entry.end_date|date:"Y"}}{% else %}Present{% endif %}</h4>
+      </td>
+      <td style="border: medium none ; padding: 0.05in;" width="85%">
+      <h4>{{education_entry.degree}} in {{education_entry.major}}</h4>
+      <h5>{{education_entry.institution.name}}, {{education_entry.department.name}}{% if education_entry.institution.address.raw %}, {{ education_entry.institution.address.raw }}{% endif %}</h5>
+    <!-- assumining if thesis_type is provided, thesis_title exists -->
+    {% if education_entry.thesis_type %}<p><b>{{education_entry.thesis_type}}:</b> {{education_entry.thesis_title}}</p>{% endif %}
+    {% if education_entry.advisor %}<p><b>Advisor:</b> {{education_entry.advisor}}</p>{% endif %}
+	  {% if education_entry.description %}<p>{{education_entry.description}}</p>{% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <p>{% endfor %} </p>
+</ul>
+<p>{% else %} </p>
+<p>No education is available.</p>
+<p>{% endif %}</p>

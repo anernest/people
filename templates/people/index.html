@@ -1,0 +1,22 @@
+{# People index.html #}
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to People!</h1>
+<p>People is a project, currently under heavy development, to maintain information for individuals' Curricula Vitae.</p>
+
+{% if person_list %}
+<h1>People<a href="{% url 'people:create_person' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></h1>
+    <ul>
+    {% for person in person_list %}
+        <li>
+            <a href="/people/cv/{{ person.id }}/">{{ person.last_name }} {{ person.first_name }}</a>
+            <a href="{% url 'people:update_person' person.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a href="{% url 'people:delete_person' person.id %}"><span class="glyphicon glyphicon-trash"></span></a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No people are available.</p>
+{% endif %}
+{% endblock content %}
