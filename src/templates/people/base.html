@@ -1,0 +1,70 @@
+{# People base.html #}
+{# https://ultimatedjango.com/learn-django/lessons/create-the-project-base-template/ #}
+{# http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-get-started.php #}
+{# HTML5 declaration #}
+<!DOCTYPE html>
+<html>
+    {# Make modifiable head elements #}
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Home {% endblock title %} | People</title>
+
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+        <!---link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.min.css"-->
+        <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.css">
+        {% block head %}
+        <!--- additional head stuff here -->
+        {% endblock head %}
+    </head>
+<body>
+<div class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="{% url 'people:index' %}">People</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="/people/">People</a></li>
+        <li><a href="/people/education">Education</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>{%if request.user.username %} Welcome, {{ request.user.username }} {% else %} Sign Up {% endif %}</a></li>
+        <li>
+        {% if request.user.username %}
+            <a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        {% else %}
+            <a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        {% endif %}
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% block content %}
+    <h1>Hello, world!</h1>
+{% endblock %}
+    {% block javascript_site %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% endblock javascript_site %}
+    
+   <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Copyright Andrew N.S. Ernest, Ph.D., P.E., BCEE, D.WRE</p>
+      </div>
+    </footer>
+
+</body>
+
+</html>
